@@ -17,7 +17,7 @@ export const signup = asyncHandler(async (req, res, next) => {
   res
     .cookie("access_token", access_token, {
       httpOnly: true,
-      sameSite: true,
+      sameSite: "strict",
       secure: process.env.NODE_ENV === "production",
       expires: new Date(
         Date.now() + parseInt(process.env.JWT_COOKIE_EXPIRE || "0")
