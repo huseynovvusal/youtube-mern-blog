@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser"
 
 import apiRouter from "./routers/index.js"
 import { connectDB } from "./helpers/db.helper.js"
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 5000
 
 // Middlewares
 app.use(express.json())
+app.use(cookieParser())
 
 // Router
 app.use("/api", apiRouter)
