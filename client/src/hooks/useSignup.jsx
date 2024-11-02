@@ -1,20 +1,23 @@
 import { useState } from "react"
+import useAuth from "../store/auth"
 
-const useLogin = () => {
+const useSignup = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const login = async (username, password) => {
+  const { setUser } = useAuth((state) => state)
+
+  const signup = async (email, username, password) => {
     setLoading(true)
     setError(null)
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, username, password }),
         credentials: "include",
       })
 
@@ -24,7 +27,8 @@ const useLogin = () => {
         throw new Error(data.error)
       }
 
-      //   localStorage.setItem("user", data.data)
+      localStorage.setItem("user", JSON.stringify(data.data))
+      setUser(data.data)
     } catch (error) {
       setError(error.message)
     }
@@ -32,7 +36,7 @@ const useLogin = () => {
     setLoading(false)
   }
 
-  return { login, loading, error }
+  return { signup, loading, error }
 }
 
-export default useLogin
+export default useSignup

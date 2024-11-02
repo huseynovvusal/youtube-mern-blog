@@ -1,6 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
+import useAuth from "../store/auth"
 
 function Navbar() {
+  const user = useAuth((state) => state.user)
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
   return (
     <div className="fixed top-0 left-0 w-full">
       <nav className="flex justify-between lg:max-w-4xl md:max-w-2xl sm:max-w-xl  mx-auto py-6 px-2">

@@ -1,19 +1,21 @@
 import React, { useState } from "react"
 import Navbar from "../components/Navbar"
-import useLogin from "../hooks/useLogin"
+import useSignup from "../hooks/useSignup"
 
-function Login() {
+function Signup() {
   const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const { login, error, loading } = useLogin()
+  const { signup, error, loading } = useSignup()
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log(username, password)
+    // !
+    console.log(email, username, password)
 
-    login(username, password)
+    signup(email, username, password)
   }
 
   return (
@@ -28,7 +30,7 @@ function Login() {
               loading ? "opacity-50 pointer-events-none" : ""
             }`}
           >
-            <h2 className="text-2xl font-semibold mb-5">Login</h2>
+            <h2 className="text-2xl font-semibold mb-5">Sign up</h2>
 
             <div className="mb-5">
               <label htmlFor="username" className="block mb-2">
@@ -39,6 +41,20 @@ function Login() {
                 onChange={(e) => setUsername(e.target.value)}
                 type="text"
                 id="username"
+                className="w-full p-2 border rounded-lg"
+                required
+              />
+            </div>
+
+            <div className="mb-5">
+              <label htmlFor="email" className="block mb-2">
+                Email
+              </label>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                id="email"
                 className="w-full p-2 border rounded-lg"
                 required
               />
@@ -59,7 +75,7 @@ function Login() {
             </div>
 
             <button className="w-full bg-black text-white py-2 rounded-lg">
-              Login
+              Sign up
             </button>
 
             {error && <p className="text-red-500 mt-5">{error}</p>}
@@ -70,4 +86,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Signup
