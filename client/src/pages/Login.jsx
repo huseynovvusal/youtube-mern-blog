@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Navbar from "../components/Navbar"
+import Navbar from "../components/layout/Navbar"
 import useLogin from "../hooks/useLogin"
 
 function Login() {
@@ -10,8 +10,6 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    console.log(username, password)
 
     login(username, password)
   }
@@ -28,7 +26,7 @@ function Login() {
               loading ? "opacity-50 pointer-events-none" : ""
             }`}
           >
-            <h2 className="text-2xl font-semibold mb-5">Login</h2>
+            <h2 className="text-5xl font-serif font-semibold mb-8">Login</h2>
 
             <div className="mb-5">
               <label htmlFor="username" className="block mb-2">
