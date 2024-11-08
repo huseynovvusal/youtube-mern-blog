@@ -1,5 +1,6 @@
 import { useState } from "react"
 import useAuth from "../store/auth"
+import { API_URL } from "../config"
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false)
@@ -12,7 +13,7 @@ const useSignup = () => {
     setError(null)
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

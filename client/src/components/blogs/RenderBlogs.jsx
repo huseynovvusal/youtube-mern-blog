@@ -15,7 +15,7 @@ function RenderBlogs({ blogs }) {
           content={content}
           id={_id}
           // @ts-ignore
-          owner={author._id === user._id}
+          owner={author._id === user?._id}
         />
       ))}
     </div>

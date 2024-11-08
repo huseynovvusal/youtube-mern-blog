@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API_URL } from "../config"
 
 const useCreate = () => {
   const [loading, setLoading] = useState(false)
@@ -9,7 +10,7 @@ const useCreate = () => {
     setError(null)
 
     try {
-      const response = await fetch("http://localhost:5000/api/blogs/create", {
+      const response = await fetch(`${API_URL}/api/blogs/create`, {
         method: "POST",
         body: formData,
         credentials: "include",

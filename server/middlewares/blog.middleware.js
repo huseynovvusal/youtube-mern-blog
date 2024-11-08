@@ -2,6 +2,7 @@ import { v2 as cloudinary } from "cloudinary"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
 import multer from "multer"
 import dotenv from "dotenv"
+import asyncHandler from "express-async-handler"
 
 import Blog from "../models/blog.model.js"
 import { HttpError } from "../helpers/error.helper.js"
@@ -39,8 +40,9 @@ export const uploadBlogImage = multer({
   },
 })
 
-export const checkBlogOwnership = async (req, res, next) => {
+export const checkBlogOwnership = asyncHandler(async (req, res, next) => {
   const { id } = req.params
+  // @ts-ignore
   const author = req.user.id
 
   const blog = await Blog.findOne({ _id: id, author })
@@ -52,4 +54,4 @@ export const checkBlogOwnership = async (req, res, next) => {
   }
 
   next()
-}
+})

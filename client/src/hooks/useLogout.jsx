@@ -1,17 +1,19 @@
 import { useState } from "react"
 import { API_URL } from "../config"
+import useAuth from "../store/auth"
 
-const useBlogs = () => {
+const useLogout = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [blogs, setBlogs] = useState([])
 
-  const getBlogs = async () => {
+  const { setUser } = useAuth((state) => state)
+
+  const logout = async () => {
     setLoading(true)
     setError(null)
 
     try {
-      const response = await fetch(`${API_URL}/api/blogs`)
+      const response = await fetch(`${API_URL}/api/auth/logout`)
 
       const data = await response.json()
 
@@ -19,7 +21,8 @@ const useBlogs = () => {
         throw new Error(data.error)
       }
 
-      setBlogs(data.data)
+      localStorage.removeItem("user")
+      setUser(null)
     } catch (error) {
       setError(error.message)
     }
@@ -27,7 +30,7 @@ const useBlogs = () => {
     setLoading(false)
   }
 
-  return { getBlogs, loading, error, blogs }
+  return { logout, loading, error }
 }
 
-export default useBlogs
+export default useLogout

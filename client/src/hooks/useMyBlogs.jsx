@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API_URL } from "../config"
 
 const useMyBlogs = () => {
   const [loading, setLoading] = useState(false)
@@ -10,7 +11,7 @@ const useMyBlogs = () => {
     setError(null)
 
     try {
-      const response = await fetch("http://localhost:5000/api/blogs/my-blogs", {
+      const response = await fetch(`${API_URL}/api/blogs/my-blogs`, {
         credentials: "include",
       })
 

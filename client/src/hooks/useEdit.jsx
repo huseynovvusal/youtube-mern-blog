@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API_URL } from "../config"
 
 const useEdit = () => {
   const [loading, setLoading] = useState(false)
@@ -9,14 +10,11 @@ const useEdit = () => {
     setError(null)
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/blogs/${id}/update`,
-        {
-          method: "PUT",
-          body: formData,
-          credentials: "include",
-        }
-      )
+      const response = await fetch(`${API_URL}/api/blogs/${id}/update`, {
+        method: "PUT",
+        body: formData,
+        credentials: "include",
+      })
 
       const data = await response.json()
 

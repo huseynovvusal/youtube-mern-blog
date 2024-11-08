@@ -50,7 +50,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/edit/:id",
-    element: <Edit />,
+    element: (
+      <CheckLoggedIn>
+        <Edit />
+      </CheckLoggedIn>
+    ),
   },
   {
     path: "/blogs/:id",

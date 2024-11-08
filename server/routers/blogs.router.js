@@ -23,6 +23,15 @@ router.post(
   create
 )
 
+// GET ALL BLOGS
+router.get("/", getAllBlogs)
+
+// MY BLOGS
+router.get("/my-blogs", authenticateToken, getMyBlogs)
+
+// GET BLOG BY ID
+router.get("/:id", getBlogById)
+
 // UPDATE
 router.put(
   "/:id/update",
@@ -39,14 +48,5 @@ router.delete(
   checkBlogOwnership,
   deleteBlogById
 )
-
-// GET ALL BLOGS
-router.get("/", getAllBlogs)
-
-// MY BLOGS
-router.get("/my-blogs", authenticateToken, getMyBlogs)
-
-// GET BLOG BY ID
-router.get("/:id", getBlogById)
 
 export default router
