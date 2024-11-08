@@ -7,7 +7,6 @@ import apiRouter from "./routers/index.js"
 import { connectDB } from "./helpers/db.helper.js"
 import { errorHandler } from "./middlewares/error.middleware.js"
 
-// !!!!!!
 import path from "path"
 
 dotenv.config()
@@ -21,14 +20,12 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 app.use(express.json())
 app.use(cookieParser())
 
-// !!!!!!!
 // Static Files
 app.use(express.static(path.join(import.meta.dirname, "../client/dist")))
 
 // Router
 app.use("/api", apiRouter)
 
-// !!
 // React
 app.get("*", (req, res) => {
   res.sendFile(path.join(import.meta.dirname, "../client/dist/index.html"))

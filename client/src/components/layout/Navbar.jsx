@@ -7,11 +7,6 @@ function Navbar() {
 
   const { logout, error, loading } = useLogout()
 
-  // !
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
   const handleLogout = () => {
     logout()
   }
