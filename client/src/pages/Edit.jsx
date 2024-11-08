@@ -1,15 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Navbar from "../components/layout/Navbar"
 import MarkdownEditor from "../components/layout/MarkdownEditor"
-import useCreate from "../hooks/useCrate"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import useBlog from "../hooks/useBlog"
+import useEdit from "../hooks/useEdit"
 
-function Create() {
+function Edit() {
+  const { id } = useParams()
+
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [image, setImage] = useState(null)
 
-  const { create, loading, error } = useCreate()
+  const { edit, loading, error } = useEdit()
+  // @ts-ignore
+  const { blog, error: blogError, getBlog, loading: blogLoading } = useBlog()
 
   const navigate = useNavigate()
 
@@ -24,23 +29,37 @@ function Create() {
       formData.set("image", image)
     }
 
-    create(formData).then(() => {
-      navigate("/")
+    edit(id, formData).then(() => {
+      navigate(`/blogs/${id}`)
     })
   }
+
+  useEffect(() => {
+    getBlog(id)
+  }, [id])
+
+  useEffect(() => {
+    if (blog) {
+      // @ts-ignore
+      setTitle(blog?.title ?? "")
+      // @ts-ignore
+      setContent(blog?.content ?? "")
+      setImage(null)
+    }
+  }, [blog])
 
   return (
     <>
       <Navbar />
       <main className="lg:max-w-4xl md:max-w-2xl sm:max-w-xl  mx-auto px-2">
         <h2 className="text-3xl font-serif font-semibold mb-4">
-          Create a blog
+          Edit the blog
         </h2>
 
         <form
           onSubmit={handleSubmit}
           className={`gap-2 flex flex-col ${
-            loading ? "opacity-50 pointer-events-none" : ""
+            loading || blogLoading ? "opacity-50 pointer-events-none" : ""
           }`}
         >
           <input
@@ -69,10 +88,11 @@ function Create() {
           </button>
 
           {error && <p className="text-red-500 mt-5">{error}</p>}
+          {blogError && <p className="text-red-500 mt-5">{blogError}</p>}
         </form>
       </main>
     </>
   )
 }
 
-export default Create
+export default Edit

@@ -8,6 +8,8 @@ import Create from "./pages/Create"
 import SingleBlog from "./pages/SingleBlog"
 import CheckLoggedIn from "./protect/CheckLoggedIn"
 import CheckNotLoggedIn from "./protect/CheckNotLoggedIn"
+import MyBlogs from "./pages/MyBlogs"
+import Edit from "./pages/Edit"
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,18 @@ const router = createBrowserRouter([
         <Create />
       </CheckLoggedIn>
     ),
+  },
+  {
+    path: "/my-blogs",
+    element: (
+      <CheckLoggedIn>
+        <MyBlogs />
+      </CheckLoggedIn>
+    ),
+  },
+  {
+    path: "/blogs/edit/:id",
+    element: <Edit />,
   },
   {
     path: "/blogs/:id",

@@ -10,7 +10,7 @@ function Navbar() {
   }, [user])
 
   return (
-    <div className="sticky z-50 top-0 left-0 w-full bg-[rgba(255,255,255,0.75)] backdrop-blur-md">
+    <div className="sticky z-50 top-0 left-0 w-full bg-[rgba(255,255,255,0.9)] backdrop-blur-sm">
       <nav className="flex justify-between items-center lg:max-w-4xl md:max-w-2xl sm:max-w-xl  mx-auto py-6 px-2">
         <h1 className="text-2xl font-semibold font-serif select-none">
           MERN Blog
@@ -22,7 +22,7 @@ function Navbar() {
           {user ? (
             <>
               <li className="hover:text-gray-600">
-                <a href="/login">My Blogs</a>
+                <a href="/my-blogs">My Blogs</a>
               </li>
 
               <li className="text-blue-900 transition-all hover:bg-blue-100 bg-blue-50 px-4 py-2 rounded-xl">
