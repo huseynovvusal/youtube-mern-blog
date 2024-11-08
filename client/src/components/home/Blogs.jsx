@@ -30,6 +30,7 @@ function Blogs() {
                 imageUrl={imageUrl}
                 title={title}
                 content={content}
+                id={_id}
               />
             ))}
         </div>

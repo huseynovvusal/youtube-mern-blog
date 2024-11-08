@@ -2,7 +2,7 @@ import React from "react"
 
 function HeroSection() {
   return (
-    <div className="flex items-center justify-center max-h-64 rounded-lg overflow-hidden mt-24">
+    <div className="flex items-center justify-center max-h-64 rounded-lg overflow-hidden">
       <h2 className="absolute text-4xl font-serif text-slate-100">
         Create your own Blog!
       </h2>

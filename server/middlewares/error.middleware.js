@@ -3,6 +3,9 @@ import { HttpError } from "../helpers/error.helper.js"
 export const errorHandler = (err, req, res, next) => {
   let httpError = err
 
+  // !
+  // console.log(err)
+
   if (err.name === "ValidationError") {
     httpError = new HttpError(
       Object.values(err.errors).map((val) => val.message),

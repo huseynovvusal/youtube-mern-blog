@@ -62,7 +62,11 @@ export const deleteBlogById = asyncHandler(async (req, res, next) => {
 })
 
 export const getAllBlogs = asyncHandler(async (req, res, next) => {
-  const blogs = await Blog.find().populate("author", "username")
+  const blogs = await Blog.find()
+    .sort({
+      createdAt: -1,
+    })
+    .populate("author", "username")
 
   res.status(200).json({
     success: true,
