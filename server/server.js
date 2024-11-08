@@ -31,7 +31,7 @@ app.use("/api", apiRouter)
 // !!
 // React
 app.get("*", (req, res) => {
-  res.sendFile(path.join(import.meta.dirname, "../../client/dist/index.html"))
+  res.sendFile(path.join(import.meta.dirname, "../client/dist/index.html"))
 })
 
 // Error Handler
